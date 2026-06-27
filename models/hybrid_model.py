@@ -49,9 +49,6 @@ class HybridModel:
             top_k
         )
 
-    # --------------------------------------------------------
-    # Parallel Hybrid (Reciprocal Rank Fusion)
-    # --------------------------------------------------------
 
     def parallel_search(
         self,
@@ -101,11 +98,6 @@ class HybridModel:
 
         return ranked[:top_k]
 
-    # --------------------------------------------------------
-    # Serial Hybrid
-    # BM25 --> Candidate Generation
-    # Embedding --> Re-ranking
-    # --------------------------------------------------------
 
     def serial_search(
         self,

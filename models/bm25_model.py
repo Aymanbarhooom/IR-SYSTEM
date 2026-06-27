@@ -24,7 +24,6 @@ class BM25Model:
             self.bm25 = None
             self.index_hash = None
             BM25Model._initialized = True
-            # Build index only once
             self.build_index()
     
     def load_documents(self):
@@ -59,10 +58,9 @@ class BM25Model:
         print(f"Building BM25 on {len(self.documents):,} documents...")
         self.bm25 = BM25Okapi(self.documents)
         
-        # Generate hash to detect changes in documents
         self.index_hash = hashlib.md5(
             str(len(self.documents)).encode() + 
-            str(self.doc_ids[-100:]).encode()  # Sample for quick check
+            str(self.doc_ids[-100:]).encode()
         ).hexdigest()
         
         print(f"✅ BM25 Index ready with {len(self.doc_ids):,} documents.")

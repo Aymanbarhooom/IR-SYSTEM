@@ -20,7 +20,6 @@ class EmbeddingModel:
         self.doc_ids = []
         self.embeddings = None
 
-        # محاولة تحميل الملفات الموجودة أولاً
         if os.path.exists(DOCUMENT_EMBEDDINGS_FILE) and os.path.exists(DOCUMENT_IDS_FILE):
             self.load_index()
         else:
@@ -28,7 +27,6 @@ class EmbeddingModel:
 
     def build_index(self, force_rebuild=False):
         """بناء أو تحميل الـ embeddings"""
-        # إذا كانت الملفات موجودة ولا نريد إعادة بناء → نحمل فقط
         if not force_rebuild and os.path.exists(DOCUMENT_EMBEDDINGS_FILE) and os.path.exists(DOCUMENT_IDS_FILE):
             self.load_index()
             return
@@ -57,10 +55,9 @@ class EmbeddingModel:
             texts,
             show_progress_bar=True,
             convert_to_numpy=True,
-            batch_size=64   # زيادة للسرعة
+            batch_size=64   
         )
 
-        # حفظ
         os.makedirs(os.path.dirname(DOCUMENT_EMBEDDINGS_FILE), exist_ok=True)
         np.save(DOCUMENT_EMBEDDINGS_FILE, self.embeddings)
 

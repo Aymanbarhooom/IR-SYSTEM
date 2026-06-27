@@ -82,7 +82,6 @@ class Evaluator:
                 top_k=TOP_K
             )
 
-            # ---------- Hybrid ----------
             if self.model_type == "hybrid":
 
                 results = results["parallel"]

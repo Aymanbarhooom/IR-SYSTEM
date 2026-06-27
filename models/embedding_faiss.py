@@ -18,7 +18,7 @@ class FAISSEmbeddingModel:
         self.model = SentenceTransformer(BERT_MODEL_NAME)
         self.index = None
         self.doc_ids = []
-        self.dimension = 384  # all-MiniLM-L6-v2
+        self.dimension = 384 
         
         self.index_path = EMBEDDINGS_DIR / "faiss_index.bin"
         self.ids_path = EMBEDDINGS_DIR / "faiss_doc_ids.json"
@@ -52,18 +52,15 @@ class FAISSEmbeddingModel:
         embeddings = self.model.encode(
             texts,
             show_progress_bar=True,
-            batch_size=64,           # يمكن زيادتها
+            batch_size=64,         
             convert_to_numpy=True
         )
 
-        # تطبيع الـ vectors (مهم لـ cosine similarity)
         faiss.normalize_L2(embeddings)
 
-        # إنشاء FAISS Index (Flat للدقة، أو IVF للسرعة على أعداد كبيرة)
-        self.index = faiss.IndexFlatIP(self.dimension)   # Inner Product = Cosine بعد التطبيع
+        self.index = faiss.IndexFlatIP(self.dimension) 
         self.index.add(embeddings)
 
-        # حفظ الفهرس
         faiss.write_index(self.index, str(self.index_path))
         
         with open(self.ids_path, "w", encoding="utf-8") as f:

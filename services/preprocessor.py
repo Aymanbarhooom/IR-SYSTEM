@@ -20,9 +20,9 @@ from config import (
 
 class Preprocessor:
 
-    def __init__(self):  # Changed from 'init' to standard Python '__init__'
+    def __init__(self): 
         self.stop_words = set(stopwords.words("english"))
-        self.lemmatizer = WordNetLemmatizer()  # Changed to WordNetLemmatizer
+        self.lemmatizer = WordNetLemmatizer() 
 
     def preprocess_text(self, text):
 
