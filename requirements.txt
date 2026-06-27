@@ -1,0 +1,14 @@
+nltk
+spacy
+scikit-learn
+rank-bm25
+sentence-transformers
+pyspellchecker
+gradio
+streamlit
+pandas
+numpy
+sqlite3
+pymongo          # إذا اخترتم MongoDB
+faiss-cpu        # إذا اخترتم FAISS للمتجهات
+ir-datasets      # لتحميل مجموعات البيانات بسهولة
